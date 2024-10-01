@@ -1,6 +1,15 @@
-import fishData from "@/config/fishData";
+"use client";
+import fishData from "@/config/Fish";
 import Image from "next/image";
 import React from "react";
+import { Accordion, AccordionItem } from "@nextui-org/accordion";
+import { IoThermometer, IoFemale, IoMale, IoEarth, IoFastFood } from "react-icons/io5";
+import { FaHeartbeat } from "react-icons/fa";
+import { GiFishEggs, GiAquarium, GiNewBorn, GiCirclingFish } from "react-icons/gi";
+import { PiEggCrackFill } from "react-icons/pi";
+import { MdOutlinePregnantWoman } from "react-icons/md";
+import { FaPersonBreastfeeding } from "react-icons/fa6";
+import Info from "./Info";
 
 const FishWiki = ({ params }: { params: { fish: string } }) => {
   const fish_url = params.fish;
@@ -8,85 +17,66 @@ const FishWiki = ({ params }: { params: { fish: string } }) => {
   if (!fish) {
     return <p>Not Found</p>;
   }
+
   return (
     <div className="flex flex-col items-center gap-8 p-12">
-      <div className="flex items-center gap-6">
-        <Image width={200} height={200} src={fish?.images.main} alt={fish.name.english} />
-        <div>
-          <h1>{fish.name.local}</h1>
-          <p>eng: {fish.name.english}</p>
-          <p>lat: {fish.name.latin}</p>
+      <div className="flex items-center justify-evenly w-full">
+        <div className="flex items-center gap-6">
+          <div style={{ backgroundImage: `url(${fish.images.main})` }} className="w-64 h-44 bg-cover bg-center rounded-md bg-no-repeat"></div>
+          <div className="flex flex-col gap-3">
+            <h1 className="text-3xl font-bold">{fish.name.local}</h1>
+            <div className="text-gray-300">
+              <p className="text-lg  italic">English: {fish.name.english}</p>
+              <p className="text-lg  italic">Latin: {fish.name.latin}</p>
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-col gap-x-8 flex-wrap h-[120px]">
+          <Info icon={IoThermometer} text={`${fish.waterRequirements.temperature.minCelsius} - ${fish.waterRequirements.temperature.maxCelsius} °C`} tooltip="სასურველი ტემპერატურა" />
+          <Info icon={() => <span>pH</span>} text={`${fish.waterRequirements.pH.min} - ${fish.waterRequirements.pH.max}`} tooltip="მჟავიანობა" />
+          <Info icon={IoMale} text={`${fish.size.male.minCm} - ${fish.size.male.maxCm} სმ`} tooltip="მამრის ზომა" />
+          <Info icon={IoFemale} text={`${fish.size.female.minCm} - ${fish.size.female.maxCm} სმ`} tooltip="მდედრის ზომა" />
+          <Info icon={IoEarth} text={fish.origin.join(", ")} tooltip="წარმოშობის არეალი" />
+          <Info icon={IoFastFood} text={fish.diet.join(", ")} tooltip="დიეტა" />
+          <Info icon={FaPersonBreastfeeding} text={fish.careLevel} tooltip="მოვლის სირთულე" />
+          <Info icon={GiAquarium} text={fish.swimmingLevel.join(", ")} tooltip="ცურვის არეალი" />
+          <Info icon={FaHeartbeat} text={`${fish.lifeExpectancy.minYears} - ${fish.lifeExpectancy.maxYears} წელი`} tooltip="სიცოცხლის ხანგრძლივობა" />
+          <Info icon={GiNewBorn} text={fish.breeding.method} tooltip="გამრავლების მეთოდი" />
+          <Info icon={GiCirclingFish} text={fish.breeding.maturityAge} tooltip="მომწიფების ასაკი" />
+          <Info
+            icon={GiFishEggs}
+            text={`${fish.breeding.offspringPerPregnancy.min} - ${fish.breeding.offspringPerPregnancy.max} ${fish.breeding.method === "ცოცხლადმშობიარე" ? "ლიფსიტა" : "კვერცხი"}`}
+            tooltip="შთამომავლობა ერთ ორსულობაზე"
+          />
+          <Info icon={MdOutlinePregnantWoman} text={`${fish.breeding.pregnancyDuration.minDays} - ${fish.breeding.pregnancyDuration.maxDays} დღე`} tooltip="ორსულობის ხანგრძლივობა" />
+          {fish.breeding.incubationPeriod && <Info icon={PiEggCrackFill} text={`${fish.breeding.incubationPeriod} დღე`} tooltip="ქვირითის ინკუბაციის ხანგრძლივობა" />}
         </div>
       </div>
-      <div className="grid grid grid-cols-3 gap-4">
+
+      {/* Tags Section */}
+      <div className="flex gap-2">
         {fish.tags.map((item, index) => (
-          <div className="bg-white text-black p-2 rounded-md" key={item + index}>
+          <div className="bg-white text-black p-2 rounded-md shadow-md" key={item + index}>
             {item}
           </div>
         ))}
       </div>
-      <div className="flex flex-col gap-5">
-        <p>
-          ტემპერატურა: {fish.waterRequirements.temperature.minCelsius} - {fish.waterRequirements.temperature.maxCelsius} &deg;C
-        </p>
-        <p>
-          pH: {fish.waterRequirements.pH.min} - {fish.waterRequirements.pH.max}
-        </p>
-        <div>
-          ზომები
-          <p>
-            მამრი: {fish.size.male.minCm} - {fish.size.male.maxCm} სმ
-          </p>
-          <p>
-            მდედრი: {fish.size.female.minCm} - {fish.size.female.maxCm} სმ
-          </p>
-        </div>
-        <p>წარმომავლობა: {fish.origin}</p>
-        <p>მოვლის სირთულე: {fish.careLevel}</p>
-        <p>დიეტა: {fish.diet}</p>
-        <p>
-          ცურვის არეალი: <span>{fish.swimmingLevel.join(", ")}</span>
-        </p>
-        <p>
-          სიცოცხლის ხანგრძლივობა: {fish.lifeExpectancy.minYears} - {fish.lifeExpectancy.maxYears} წელი
-        </p>
-        <p>გამრავლების მეთოდი: {fish.breeding.method}</p>
-        <p>მომწიფების ასაკი: {fish.breeding.maturityAge}</p>
-        <p>
-          შთამომავლობა ერთ ორსულობაზე:{fish.breeding.offspringPerPregnancy.min}-{fish.breeding.offspringPerPregnancy.max}
-        </p>
-        <p>
-          ორსულობის პერიოდი: {fish.breeding.pregnancyDuration.minDays}-{fish.breeding.pregnancyDuration.maxDays} დღე
-        </p>
-        {fish.breeding.incubationPeriod && <p>ქვირითის ინკუბაციის პერიოდი: {fish.breeding.incubationPeriod}</p>}
-      </div>
 
-      <div className="p-8">
-        <h1 className="text-2xl mb-8 font-bold">სათაური</h1>
-        <p className="text-lg">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus explicabo necessitatibus ex ipsa porro quae sint corporis vero molestias illum, facere a cupiditate, adipisci quis
-          obcaecati atque consequatur nulla eius! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus explicabo necessitatibus ex ipsa porro quae sint corporis vero molestias illum,
-          facere a cupiditate, adipisci quis obcaecati atque consequatur nulla eius!
-        </p>
-        <div className="flex gap-9">
-          <Image width={200} height={200} src={fish?.images.main} alt={fish.name.english} />
-          <Image width={200} height={200} src={fish?.images.main} alt={fish.name.english} />
-        </div>
+      {/* Key Details Section */}
+      <div className="flex flex-col gap-5"></div>
 
-        <h1 className="text-2xl mb-8 font-bold">სათაური</h1>
-        <p className="text-lg">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus explicabo necessitatibus ex ipsa porro quae sint corporis vero molestias illum, facere a cupiditate, adipisci quis
-          obcaecati atque consequatur nulla eius! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus explicabo necessitatibus ex ipsa porro quae sint corporis vero molestias illum,
-          facere a cupiditate, adipisci quis obcaecati atque consequatur nulla eius!
-        </p>
-        <Image width={200} height={200} src={fish?.images.main} alt={fish.name.english} />
-        <h1 className="text-2xl mb-8 font-bold">სათაური</h1>
-        <p className="text-lg">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus explicabo necessitatibus ex ipsa porro quae sint corporis vero molestias illum, facere a cupiditate, adipisci quis
-          obcaecati atque consequatur nulla eius! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus explicabo necessitatibus ex ipsa porro quae sint corporis vero molestias illum,
-          facere a cupiditate, adipisci quis obcaecati atque consequatur nulla eius!
-        </p>
-      </div>
+      <Accordion selectionMode="multiple">
+        {fish.article.map((section, index) => (
+          <AccordionItem key={fish.urlSlug + section.title} aria-label={section.title} title={section.title}>
+            <p className="text-lg mb-4">{section.text}</p>
+            {section.image && (
+              <div className="flex justify-center mb-4">
+                <Image width={400} height={300} src={section.image} alt={section.title} className="rounded-lg shadow-lg" />
+              </div>
+            )}
+          </AccordionItem>
+        ))}
+      </Accordion>
     </div>
   );
 };
