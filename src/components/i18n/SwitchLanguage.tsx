@@ -24,7 +24,7 @@ export default function SwitchLanguage({ className }: Props) {
 
       startTransition(() => {
         router.replace(
-          // @ts-expect-error
+          // @ts-expect-error -- Just ignore this error
           { pathname, params },
           { locale: nextLocale }
         );

@@ -1,4 +1,3 @@
-import { Link } from "@/i18n/routing";
 import React from "react";
 import Icon from "@/assets/svg/bag.svg";
 import Image from "next/image";

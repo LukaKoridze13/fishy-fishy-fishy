@@ -9,7 +9,7 @@ import localFont from "next/font/local";
 
 const fontKa = localFont({ src: "../../assets/fonts/firago.ttf" });
 
-export default async function LocaleLayout({ children, params }: { children: React.ReactNode; params: { locale: string } }) {
+export default async function LocaleLayout({ children, params }: { children: React.ReactNode; params: Promise<any> }) {
   const { locale } = await params;
 
   if (!routing.locales.includes(locale as any)) {
