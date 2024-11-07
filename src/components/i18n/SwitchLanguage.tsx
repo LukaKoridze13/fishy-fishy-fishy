@@ -33,8 +33,8 @@ export default function SwitchLanguage({ className }: Props) {
   }
 
   if (locale === "ka") {
-    return <Image onClick={onLanguageChange} className={`w-10 cursor-pointer ${className}`} src={EN} alt="Flag of United Kingdom" />;
+    return <Image onClick={onLanguageChange} className={`w-[40px] cursor-pointer ${className}`} src={EN} alt="Flag of United Kingdom" />;
   } else {
-    return <Image onClick={onLanguageChange} className={`w-10 cursor-pointer ${className}`} src={GE} alt="Flag of Georgia" />;
+    return <Image onClick={onLanguageChange} className={`w-[40px] cursor-pointer ${className}`} src={GE} alt="Flag of Georgia" />;
   }
 }

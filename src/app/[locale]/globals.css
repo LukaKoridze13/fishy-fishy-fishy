@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@media (-webkit-min-device-pixel-ratio: 1.20) {
+  html {
+    font-size: 13.72;
+  }
+}
+@media (-webkit-min-device-pixel-ratio: 1.5) {
+  html {
+    font-size: 13.72px;
+  }
+}
+@media (-webkit-min-device-pixel-ratio: 1.75) {
+  html {
+    font-size: 13.72px;
+  }
+}
+@media (-webkit-min-device-pixel-ratio: 2) {
+  html {
+    font-size: 13.72px;
+  }
+}

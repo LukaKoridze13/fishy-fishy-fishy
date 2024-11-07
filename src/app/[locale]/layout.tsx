@@ -5,6 +5,9 @@ import { routing } from "@/i18n/routing";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/next_auth/auth";
+import localFont from "next/font/local";
+
+const fontKa = localFont({ src: "../../assets/fonts/firago.ttf" });
 
 export default async function LocaleLayout({ children, params }: { children: React.ReactNode; params: { locale: string } }) {
   const { locale } = await params;
@@ -18,7 +21,7 @@ export default async function LocaleLayout({ children, params }: { children: Rea
 
   return (
     <html lang={locale}>
-      <body>
+      <body className={`${locale === "ka" ? fontKa.className : fontKa.className}`}>
         <SessionProvider session={session}>
           <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
         </SessionProvider>
