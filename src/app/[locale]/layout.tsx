@@ -21,7 +21,7 @@ export default async function LocaleLayout({ children, params }: { children: Rea
 
   return (
     <html lang={locale}>
-      <body className={`${locale === "ka" ? fontKa.className : fontKa.className}`}>
+      <body className={`text-white ${locale === "ka" ? fontKa.className : fontKa.className}`}>
         <SessionProvider session={session}>
           <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
         </SessionProvider>

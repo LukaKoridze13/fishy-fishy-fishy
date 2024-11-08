@@ -7,10 +7,11 @@ import Facebook from "../primitive/Facebook";
 import Cart from "../primitive/Cart";
 import FlexBox from "../frames/FlexBox";
 import Menu from "../primitive/Menu";
+import HeaderFrame from "../frames/HeaderFrame";
 
 const Header = () => {
   return (
-    <header className="bg-blue bg-opacity-10 w-full px-16 py-6">
+    <HeaderFrame>
       <MaxContent className="flex items-center justify-between">
         <Logo />
         <FlexBox>
@@ -21,7 +22,7 @@ const Header = () => {
           <Menu />
         </FlexBox>
       </MaxContent>
-    </header>
+    </HeaderFrame>
   );
 };
 

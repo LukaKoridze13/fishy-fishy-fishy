@@ -1,11 +1,12 @@
 import React from "react";
 import Header from "../sections/Header";
+import PageFrame from "../frames/PageFrame";
 
 const HomePage = () => {
   return (
-    <main className="h-[300vh]" style={{ background: "linear-gradient(180deg, #2726AB 0%, #001731 100%)" }}>
+    <PageFrame className="h-[300vh]">
       <Header />
-    </main>
+    </PageFrame>
   );
 };
 

@@ -8,6 +8,7 @@ const config: Config = {
         white: "#FAFAFA",
         blue: "#001731",
         darkBlue: "#0E1D5D",
+        lightBlue: "#2726AB",
         background: "var(--background)",
         foreground: "var(--foreground)",
       },

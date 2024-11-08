@@ -1,6 +1,22 @@
 {
-  "HomePage": {
-    "title": "Hello world!",
-    "about": "Go to the about page"
+  "ContentManagementSystem": {
+    "tabTitle": "Control Panel",
+    "Menu": {
+      "general": "General Settings",
+      "news": "News"
+    },
+    "News": {
+      "addNews": "Add News",
+      "Form": {
+        "title": "Title (GEO)",
+        "title_": "Title (ENG)",
+        "description": "Description (GEO)",
+        "description_": "Description (ENG)",
+        "image": "Upload Image",
+        "button": "Button Text (GEO)",
+        "button_": "Button Text (ENG)",
+        "submit": "Submit"
+      }
+    }
   }
 }
